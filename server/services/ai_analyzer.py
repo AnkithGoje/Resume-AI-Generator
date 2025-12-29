@@ -62,7 +62,7 @@ def analyze_resume_with_ai(text: str, target_role: str, job_description: str = N
       "optimized_bullets": [<list of strings, rewrite 3-4 key bullet points using the XYZ formula and strong action verbs>],
       "missing_skills": [<list of strings, critical keywords from the JD or Industry Standards that are missing>],
       "final_suggestions": "<string, summary of the Strategic Assessment and Implementation Guidance>",
-      "optimized_resume_content": "<string, THE COMPLETE RESTRUCTURED RESUME IN MARKDOWN FORMAT. Follow this structure strictly:\n\n# NAME\n**Title** | **Location** | **Links**\n\n## SUMMARY\n(Paragraph)\n\n## EXPERIENCE\n**Role** at **Company** (Date Range)\n* Bullet point...\n\n## PROJECTS\n**Title** (Technologies used)\n* Bullet point...\n\n## SKILLS\n* **Category**: Skills...\n\n## EDUCATION\n**Degree** | **University** (Dates)\n\nDo NOT use code blocks.>"
+      "optimized_resume_content": "<string, THE COMPLETE RESTRUCTURED RESUME IN MARKDOWN FORMAT. Follow this structure strictly:\n\n# NAME\n**Title** | **Location** | **Links**\n\n## SUMMARY\n(Paragraph)\n\n## EXPERIENCE\n**Role** at **Company** (Date Range)\n* Bullet point...\n\n(IMPORTANT: Use a blank line here before the next job)\n**Role** at **Company** (Date Range)\n* Bullet point...\n\n## PROJECTS\n**Title** (Technologies used)\n* Bullet point...\n\n## CERTIFICATIONS\n* **Name** (Issuer, Date)\n\n## SKILLS\n* **Category**: Skills...\n\n## EDUCATION\n**Degree** | **University** (Dates)\n\nDo NOT use code blocks.>"
     }}
     </Output_Format>
     """

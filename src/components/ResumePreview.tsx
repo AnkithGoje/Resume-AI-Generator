@@ -14,6 +14,11 @@ export const ResumePreview = forwardRef<HTMLDivElement, ResumePreviewProps>(({ c
                     @media print {
                          body { -webkit-print-color-adjust: exact; }
                     }
+                    /* Center the subtitle (first P after H1) */
+                    h1 + p {
+                        text-align: center;
+                        margin-bottom: 1.5rem;
+                    }
                 `}
             </style>
             <div className="prose pro max-w-none prose-headings:text-black prose-p:text-black prose-li:text-black">
