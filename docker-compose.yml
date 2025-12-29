@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./server
+    ports:
+      - "8000:8000"
+    # Load environment variables from the server directory
+    env_file:
+      - ./server/.env
+    # environment:
+    #   - GROQ_API_KEY=${GROQ_API_KEY} # fallback if needed
+    volumes:
+      - ./server:/app
+      # Exclude venv if exists locally to avoid linux/windows mismatch
+      - /app/venv
+    restart: on-failure
+
+  frontend:
+    build: .
+    ports:
+      - "3000:80" # Map host 3000 to nginx 80
+    depends_on:
+      - backend
+    restart: on-failure
+
+# No database needed yet
