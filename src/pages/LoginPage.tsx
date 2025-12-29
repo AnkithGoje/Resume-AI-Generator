@@ -23,7 +23,7 @@ export default function LoginPage() {
             formData.append('username', email); // OAuth2 expects 'username'
             formData.append('password', password);
 
-            const response = await axios.post('http://localhost:8000/api/auth/token', formData);
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/token`, formData);
 
             login(response.data.access_token);
             navigate('/');

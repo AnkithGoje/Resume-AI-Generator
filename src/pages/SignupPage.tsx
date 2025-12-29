@@ -27,7 +27,7 @@ export default function SignupPage() {
 
         try {
             // 1. Register
-            await axios.post('http://localhost:8000/api/auth/signup', {
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/signup`, {
                 email,
                 password
             });
@@ -37,7 +37,7 @@ export default function SignupPage() {
             formData.append('username', email);
             formData.append('password', password);
 
-            const response = await axios.post('http://localhost:8000/api/auth/token', formData);
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/token`, formData);
 
             login(response.data.access_token);
             navigate('/');
