@@ -22,10 +22,11 @@ export const AnalysisResultDisplay: React.FC<AnalysisResultProps> = ({ result, o
     const componentRef = useRef<HTMLDivElement>(null);
 
     const handlePrint = useReactToPrint({
-        content: () => componentRef.current,
+        contentRef: componentRef,
         documentTitle: `Optimized_Resume_${result.overall_score}`,
-        removeAfterPrint: true
-    } as any);
+        onAfterPrint: () => console.log("Print successful"),
+        onPrintError: (errorLocation, error) => console.error("Print failed", errorLocation, error),
+    });
 
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
