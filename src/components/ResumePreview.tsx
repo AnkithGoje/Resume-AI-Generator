@@ -16,7 +16,7 @@ export const ResumePreview = forwardRef<HTMLDivElement, ResumePreviewProps>(({ c
                     }
                     /* Center the subtitle (first P after H1) */
                     h1 + p {
-                        text-align: center;
+                        text-align: center !important;
                         margin-bottom: 1.5rem;
                     }
                 `}
