@@ -98,7 +98,7 @@ def analyze_resume_with_ai(text: str, target_role: str, job_description: str = N
                     "content": prompt,
                 }
             ],
-            model="llama-3.3-70b-versatile",
+            model="openai/gpt-oss-120b",
             response_format={"type": "json_object"},
         )
         
