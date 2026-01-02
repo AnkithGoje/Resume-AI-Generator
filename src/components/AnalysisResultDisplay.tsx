@@ -22,8 +22,7 @@ export const AnalysisResultDisplay: React.FC<AnalysisResultProps> = ({ result, o
     const componentRef = useRef<HTMLDivElement>(null);
 
     const handlePrint = useReactToPrint({
-        // @ts-ignore: content property is valid in runtime but missing in type definition
-        content: () => componentRef.current,
+        contentRef: componentRef,
         documentTitle: `Optimized_Resume_${result.overall_score}`,
         onAfterPrint: () => console.log("Print successful"),
         onPrintError: (errorLocation, error) => console.error("Print failed", errorLocation, error),
