@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import type { AnalysisResult } from '../types';
-import { useReactToPrint } from 'react-to-print';
+// @ts-ignore
+import html2pdf from 'html2pdf.js';
 
 import { ResumePreview } from './ResumePreview';
 import { Card, CardContent } from './ui/Card';
@@ -21,12 +22,20 @@ interface AnalysisResultProps {
 export const AnalysisResultDisplay: React.FC<AnalysisResultProps> = ({ result, onReset }) => {
     const componentRef = useRef<HTMLDivElement>(null);
 
-    const handlePrint = useReactToPrint({
-        contentRef: componentRef,
-        documentTitle: `Optimized_Resume_${result.overall_score}`,
-        onAfterPrint: () => console.log("Print successful"),
-        onPrintError: (errorLocation, error) => console.error("Print failed", errorLocation, error),
-    });
+    const handleDownloadPDF = () => {
+        const element = componentRef.current;
+        if (!element) return;
+
+        const opt = {
+            margin: 0,
+            filename: `Optimized_Resume_${result.overall_score}.pdf`,
+            image: { type: 'jpeg' as const, quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: 'mm' as const, format: 'a4' as const, orientation: 'portrait' as const }
+        };
+
+        html2pdf().set(opt).from(element).save();
+    };
 
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -188,7 +197,7 @@ export const AnalysisResultDisplay: React.FC<AnalysisResultProps> = ({ result, o
                             <Button
                                 variant="primary"
                                 size="sm"
-                                onClick={() => handlePrint && handlePrint()}
+                                onClick={handleDownloadPDF}
                                 className="h-8 text-xs bg-indigo-600 hover:bg-indigo-700"
                             >
                                 <Download className="w-3 h-3 mr-1.5" /> Save as PDF
