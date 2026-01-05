@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import type { AnalysisResult } from '../types';
-// @ts-ignore
 import html2pdf from 'html2pdf.js';
 
 import { ResumePreview } from './ResumePreview';
@@ -22,7 +21,7 @@ interface AnalysisResultProps {
 export const AnalysisResultDisplay: React.FC<AnalysisResultProps> = ({ result, onReset }) => {
     const componentRef = useRef<HTMLDivElement>(null);
 
-    const handleDownloadPDF = () => {
+    const handleDownloadPDF = async () => {
         const element = componentRef.current;
         if (!element) return;
 
@@ -34,7 +33,12 @@ export const AnalysisResultDisplay: React.FC<AnalysisResultProps> = ({ result, o
             jsPDF: { unit: 'mm' as const, format: 'a4' as const, orientation: 'portrait' as const }
         };
 
-        html2pdf().set(opt).from(element).save();
+        try {
+            await html2pdf().set(opt).from(element).save();
+        } catch (error) {
+            console.error('Error generating PDF:', error);
+            alert('Failed to generate PDF. Please try again.');
+        }
     };
 
     return (
