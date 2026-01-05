@@ -23,3 +23,20 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+
+# Database
+*.db
+sql_app.db
+*.sqlite3
+
+# Scripts
+verify_login.py
+create_test_user.py

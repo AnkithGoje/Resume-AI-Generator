@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import type { AnalysisResult } from '../types';
-import html2pdf from 'html2pdf.js';
+import { useReactToPrint } from 'react-to-print';
 
 import { ResumePreview } from './ResumePreview';
 import { Card, CardContent } from './ui/Card';
@@ -21,25 +21,13 @@ interface AnalysisResultProps {
 export const AnalysisResultDisplay: React.FC<AnalysisResultProps> = ({ result, onReset }) => {
     const componentRef = useRef<HTMLDivElement>(null);
 
-    const handleDownloadPDF = async () => {
-        const element = componentRef.current;
-        if (!element) return;
-
-        const opt = {
-            margin: 0,
-            filename: `Optimized_Resume_${result.overall_score}.pdf`,
-            image: { type: 'jpeg' as const, quality: 0.98 },
-            html2canvas: { scale: 2, useCORS: true },
-            jsPDF: { unit: 'mm' as const, format: 'a4' as const, orientation: 'portrait' as const }
-        };
-
-        try {
-            await html2pdf().set(opt).from(element).save();
-        } catch (error) {
-            console.error('Error generating PDF:', error);
-            alert('Failed to generate PDF. Please try again.');
+    const handleDownloadPDF = useReactToPrint({
+        contentRef: componentRef,
+        documentTitle: `Optimized_Resume_${result.overall_score}`,
+        onAfterPrint: () => {
+            console.log("Print completed");
         }
-    };
+    });
 
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
