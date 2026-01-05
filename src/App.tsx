@@ -13,7 +13,7 @@ function Dashboard() {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  useAuth(); // Keeping hook for context checks if needed
+  const { token } = useAuth();
 
   const handleAnalysis = async (formData: FormData) => {
     setIsLoading(true);
@@ -22,6 +22,7 @@ function Dashboard() {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/analyze-resume`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`
         },
       });
       setResult(response.data);
