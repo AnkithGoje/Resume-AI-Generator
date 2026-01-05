@@ -18,8 +18,12 @@ function Dashboard() {
   const handleAnalysis = async (formData: FormData) => {
     setIsLoading(true);
     setError(null);
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    console.log("Targeting API:", apiUrl);
+    console.log("Attempting analysis with token:", token);
+
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/analyze-resume`, formData, {
+      const response = await axios.post(`${apiUrl}/api/analyze-resume`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`
