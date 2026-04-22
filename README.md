@@ -89,14 +89,3 @@ This project is optimized for a **Split Deployment** strategy:
 2.  **Frontend**: Deploy the root directory to **Lovable.dev**, **Vercel**, or **Netlify**.
 3.  **Link**: Update the Frontend's `VITE_API_URL` environment variable to point to your live backend URL (e.g., `https://my-api.onrender.com`).
 
-## 🤝 Contributing
-
-1.  Fork the repository
-2.  Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
-
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
